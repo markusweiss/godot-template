@@ -1,22 +1,28 @@
 extends CharacterBody2D
 
 const SPEED = 500.0
-const STOP_LEFT = -60
-var STOP_RIGHT = 600
-
+const STOP_LEFT = -500
+const STOP_TOP = -270
+const STOP_BOTTOM =240
+var STOP_RIGHT = 500
 
 func _ready():
 	var viewport_size = get_viewport().size
-	STOP_RIGHT = viewport_size.x - STOP_LEFT - 240
+	STOP_RIGHT = viewport_size.x - 650
+	
+	print(viewport_size)
 
 func _physics_process(_delta):
-	var direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	var direction = Vector2.ZERO
+	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	direction.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	
-	if direction != 0:
-		velocity.x = direction * SPEED
+	if direction != Vector2.ZERO:
+		velocity = direction.normalized() * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity = velocity.move_toward(Vector2.ZERO, SPEED * _delta)
 	
 	move_and_slide()
 
 	position.x = clamp(position.x, STOP_LEFT, STOP_RIGHT)
+	position.y = clamp(position.y, STOP_TOP, STOP_BOTTOM)
