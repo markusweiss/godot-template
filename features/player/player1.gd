@@ -1,10 +1,14 @@
 extends CharacterBody2D
 
+# TODO: change const and make dynamic
+
 const SPEED = 500.0
 const STOP_LEFT = -500
 const STOP_TOP = -270
 const STOP_BOTTOM =240
 var STOP_RIGHT = 500
+
+# TODO: calc on dynamic screen size
 
 func _ready():
 	var viewport_size = get_viewport().size
