@@ -6,7 +6,7 @@ const SPEED : int = 500
 const STOP_LEFT : int = -500
 const STOP_TOP : int = -270
 const STOP_BOTTOM : int = 240
-var STOP_RIGHT: int = 500
+const STOP_RIGHT: int = 500
 
 # 1 DRAG OFF < 1 is dragging
 const DRAG : float = 1.0
@@ -17,7 +17,7 @@ var direction = Vector2.ZERO
 
 func _ready():
 	var viewport_size = get_viewport().size
-	STOP_RIGHT = viewport_size.x - 650
+	#STOP_RIGHT = viewport_size.x - 650
 	print(viewport_size)
 
 func _physics_process(delta):

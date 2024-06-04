@@ -18,6 +18,13 @@ config/icon="res://features/player/assets/images/icon.svg"
 
 Globals="*res://autoloads/globals.gd"
 
+[display]
+
+window/size/viewport_width=2304
+window/size/viewport_height=1296
+window/stretch/mode="viewport"
+window/stretch/scale=2.0
+
 [input]
 
 move_right={
