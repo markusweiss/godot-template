@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b30sx5ej0hid5"]
 
-[ext_resource type="Script" path="res://features/UI/main_menu.gd" id="1_8h34a"]
-[ext_resource type="AudioStream" uid="uid://myljnx3tb10x" path="res://features/UI/assets/sounds/templateloop.mp3" id="2_wspj3"]
-[ext_resource type="Script" path="res://features/UI/AudioMenuLoop.gd" id="3_bto56"]
+[ext_resource type="Script" path="res://features/UI/main_menu/main_menu.gd" id="1_8h34a"]
+[ext_resource type="AudioStream" uid="uid://myljnx3tb10x" path="res://features/UI/main_menu/assets/sounds/templateloop.mp3" id="2_wspj3"]
+[ext_resource type="Script" path="res://features/UI/main_menu/AudioMenuLoop.gd" id="3_bto56"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_8h34a")
