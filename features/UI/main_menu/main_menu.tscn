@@ -72,5 +72,7 @@ text = "Version:"
 stream = ExtResource("2_wspj3")
 script = ExtResource("3_bto56")
 
+[connection signal="pressed" from="Panel/VBoxContainerButtons/ButtonStart" to="." method="_on_button_start_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainerButtons/ButtonSettings" to="." method="_on_button_settings_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainerButtons/ButtonQuit" to="." method="_on_button_quit_pressed"]
 [connection signal="finished" from="AudioMenuLoop" to="AudioMenuLoop" method="_on_finished"]

@@ -2,10 +2,21 @@ extends Node
 
 const VERSION : float = 0.1
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 @onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
 @onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
+
+var settings_menu_scene:PackedScene = preload("res://features/UI/setting_menu/assets_menu.tscn")
+#temp do i need?
+var settings_menu = null
+ 
+func _ready():
+	pass
+
+
+# temp perhaps remove
+func open_settings_menu():
+	if not settings_menu:
+		settings_menu = settings_menu_scene.instantiate()
+		get_tree().root.add_child(settings_menu)
+	else:
+		push_warning('settings menu already exists in this scene')

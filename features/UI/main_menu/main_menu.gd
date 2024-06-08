@@ -1,14 +1,28 @@
 extends CanvasLayer
 
+var start_player_scene:PackedScene = preload("res://features/player/player.tscn")
+var start_player = null
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	%Version.text = " Version: " + str(Globals.VERSION)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+# Temp remove only for testing
+func start_player_win():
+	if not start_player:
+		start_player = start_player_scene.instantiate()
+		get_tree().root.add_child(start_player)
+	else:
+		push_warning('player already exists in this scene')
 
 
 func _on_button_quit_pressed():
 	get_tree().quit()
+
+
+func _on_button_settings_pressed():
+	Globals.open_settings_menu()
+
+
+func _on_button_start_pressed():
+	start_player_win()
