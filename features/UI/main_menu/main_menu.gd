@@ -1,20 +1,20 @@
 extends CanvasLayer
 
-var start_player_scene:PackedScene = preload("res://features/levels/test_level.tscn")
-var start_player = null
+var test_level_scene:PackedScene = preload("res://features/levels/test_level.tscn")
+var test_level = null
 
 
 func _ready():
 	%Version.text = " Version: " + str(Globals.VERSION)
 
 # Temp remove only for testing
-func start_player_win():
-	if not start_player:
+func start_test_level():
+	if not test_level:
 		queue_free()
-		start_player = start_player_scene.instantiate()
-		get_tree().root.add_child(start_player)
+		test_level = test_level_scene.instantiate()
+		get_tree().root.add_child(test_level)
 	else:
-		push_warning('player already exists in this scene')
+		push_warning('Test Level already exists in this scene')
 
 
 func _on_button_quit_pressed():
@@ -26,4 +26,4 @@ func _on_button_settings_pressed():
 
 
 func _on_button_start_pressed():
-	start_player_win()
+	start_test_level()
