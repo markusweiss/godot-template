@@ -7,24 +7,16 @@
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_8h34a")
 
+[node name="AudioMenuLoop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_wspj3")
+script = ExtResource("3_bto56")
+
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="VBoxContainerHeadline" type="VBoxContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 23.0
-grow_horizontal = 2
-
-[node name="GameTitle" type="Label" parent="Panel/VBoxContainerHeadline"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Headline"
 
 [node name="VBoxContainerButtons" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -39,40 +31,56 @@ offset_right = 48.0
 offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="ButtonStart" type="Button" parent="Panel/VBoxContainerButtons"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainerButtons"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainerButtons/MarginContainer"]
+layout_mode = 2
+
+[node name="ButtonStart" type="Button" parent="Panel/VBoxContainerButtons/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Start Game"
 
-[node name="ButtonSettings" type="Button" parent="Panel/VBoxContainerButtons"]
+[node name="ButtonSettings" type="Button" parent="Panel/VBoxContainerButtons/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
 
-[node name="ButtonQuit" type="Button" parent="Panel/VBoxContainerButtons"]
+[node name="ButtonQuit" type="Button" parent="Panel/VBoxContainerButtons/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit Game"
 
-[node name="VBoxContainerFooter" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Title"
+
+[node name="VBoxContainerVersion" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 51.0
+offset_top = -40.0
+offset_right = 40.0
 grow_vertical = 0
 
-[node name="Version" type="Label" parent="Panel/VBoxContainerFooter"]
+[node name="Version" type="Label" parent="Panel/VBoxContainerVersion"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "Version:"
 
-[node name="AudioMenuLoop" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_wspj3")
-script = ExtResource("3_bto56")
-
-[connection signal="pressed" from="Panel/VBoxContainerButtons/ButtonStart" to="." method="_on_button_start_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainerButtons/ButtonSettings" to="." method="_on_button_settings_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainerButtons/ButtonQuit" to="." method="_on_button_quit_pressed"]
 [connection signal="finished" from="AudioMenuLoop" to="AudioMenuLoop" method="_on_finished"]
+[connection signal="pressed" from="Panel/VBoxContainerButtons/MarginContainer/VBoxContainer/ButtonStart" to="." method="_on_button_start_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainerButtons/MarginContainer/VBoxContainer/ButtonSettings" to="." method="_on_button_settings_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainerButtons/MarginContainer/VBoxContainer/ButtonQuit" to="." method="_on_button_quit_pressed"]

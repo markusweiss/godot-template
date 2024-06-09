@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var start_player_scene:PackedScene = preload("res://features/player/player.tscn")
+var start_player_scene:PackedScene = preload("res://features/levels/test_level.tscn")
 var start_player = null
 
 
@@ -10,6 +10,7 @@ func _ready():
 # Temp remove only for testing
 func start_player_win():
 	if not start_player:
+		queue_free()
 		start_player = start_player_scene.instantiate()
 		get_tree().root.add_child(start_player)
 	else:
