@@ -16,7 +16,6 @@ func _ready():
 # temp perhaps remove
 func open_settings_menu():
 	if not settings_menu:
-		print("open menu")
 		settings_menu = settings_menu_scene.instantiate()
 		get_tree().root.add_child(settings_menu)
 		#get_tree().root.add_child.call_deferred(settings_menu)
