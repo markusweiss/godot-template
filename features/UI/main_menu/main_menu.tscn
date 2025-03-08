@@ -17,6 +17,7 @@ script = ExtResource("1_8h34a")
 
 [node name="AudioMenuLoop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_wspj3")
+volume_db = -6.0
 script = ExtResource("3_bto56")
 
 [node name="Control" type="Control" parent="."]
