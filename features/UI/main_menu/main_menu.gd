@@ -6,6 +6,7 @@ var test_level = null
 
 func _ready():
 	%Version.text = " Version: " + str(Globals.VERSION)
+	AudioSettings.apply_saved_audio_settings()
 
 # Temp remove only for testing
 func start_test_level():

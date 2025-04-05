@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvycnsdktcca1"]
 
-[ext_resource type="Script" path="res://features/UI/setting_menu/assets_menu.gd" id="1_1v5d6"]
-[ext_resource type="Script" path="res://features/UI/setting_menu/MasterSlider.gd" id="2_5d2m7"]
+[ext_resource type="Script" uid="uid://cyoirusq220eo" path="res://features/UI/setting_menu/assets_menu.gd" id="1_1v5d6"]
+[ext_resource type="Script" uid="uid://p83nr8ychoy8" path="res://features/UI/setting_menu/audio_slider.gd" id="2_5d2m7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i2w7a"]
 bg_color = Color(0.231373, 0.231373, 0.231373, 1)
@@ -61,7 +61,25 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-value = 50.0
+max_value = 1.0
+step = 0.01
+script = ExtResource("2_5d2m7")
+bus_name = "SFX"
+default_value = 0.22
+
+[node name="MusicVoume" type="Label" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+script = ExtResource("2_5d2m7")
+bus_name = "Music"
+default_value = 0.7
 
 [node name="MasterVolume" type="Label" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -73,19 +91,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 1.0
 step = 0.01
-value = 1.0
 script = ExtResource("2_5d2m7")
 bus_name = "Master"
-
-[node name="MusicVoume" type="Label" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
-layout_mode = 2
-text = "Music Volume"
-
-[node name="MusicSlider" type="HSlider" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-value = 70.0
+default_value = 0.78
 
 [node name="Button" type="Button" parent="MarginContainer/Panel/VBoxContainer"]
 layout_mode = 2

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b30sx5ej0hid5"]
 
-[ext_resource type="Script" path="res://features/UI/main_menu/main_menu.gd" id="1_8h34a"]
+[ext_resource type="Script" uid="uid://dd8f1cpvokue6" path="res://features/UI/main_menu/main_menu.gd" id="1_8h34a"]
 [ext_resource type="AudioStream" uid="uid://myljnx3tb10x" path="res://features/UI/main_menu/assets/sounds/templateloop.mp3" id="2_wspj3"]
-[ext_resource type="Script" path="res://features/UI/main_menu/AudioMenuLoop.gd" id="3_bto56"]
+[ext_resource type="Script" uid="uid://djft5vi7y7tgx" path="res://features/UI/main_menu/AudioMenuLoop.gd" id="3_bto56"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37v8d"]
 bg_color = Color(0.231373, 0.231373, 0.231373, 1)
@@ -17,7 +17,6 @@ script = ExtResource("1_8h34a")
 
 [node name="AudioMenuLoop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_wspj3")
-volume_db = -6.0
 script = ExtResource("3_bto56")
 
 [node name="Control" type="Control" parent="."]
