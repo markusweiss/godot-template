@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var test_level_scene:PackedScene = preload("res://features/levels/test_level.tscn")
+var test_level_scene:PackedScene = preload("res://features/levels/test_fly_game.tscn")
 var test_level = null
 
 
