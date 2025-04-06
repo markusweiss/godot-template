@@ -4,7 +4,7 @@ extends Area2D
 
 var speed := Vector2.ZERO
 var screen_size : Vector2
-var is_clickable := true  # Kann deaktiviert werden, wenn nötig
+#var is_clickable := true  # Kann deaktiviert werden, wenn nötig
 
 func _ready():
 	randomize()
@@ -12,9 +12,9 @@ func _ready():
 	setup_spawn()
 	sprite.play("fliegen")
 		
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
-	input_event.connect(_on_input_event)
+	#mouse_entered.connect(_on_mouse_entered)
+	#mouse_exited.connect(_on_mouse_exited)
+	#input_event.connect(_on_input_event)
 
 func setup_spawn():
 	# Zufällige Startposition an einem der Bildschirmränder
@@ -51,26 +51,28 @@ func _process(delta):
 	if position.x < -150 or position.x > screen_size.x + 150 or position.y < -150 or position.y > screen_size.y + 150:
 		queue_free()
 
-signal fly_clicked
+#signal fly_clicked
 
-func _on_input_event(viewport, event, shape_idx):
-	if not is_clickable:
-		return
+#func _on_input_event(viewport, event, shape_idx):
+	#if not is_clickable:
+	#	return
 		
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		print("Fly clicked and destroyed!")
+	#if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+	#	print("Fly clicked and destroyed!")
 		# Optional: Effekt vor dem Löschen abspielen
 		#sprite.play("explode")  # Angenommen Sie haben eine Animation namens "explode"
 		#await sprite.animation_finished
-		fly_clicked.emit()
-		queue_free()
+	#	fly_clicked.emit()
+	#	queue_free()
 
-func _on_mouse_entered():
+#func _on_mouse_entered():
 	# Optional: Mouse-over Effekt
-	if is_clickable:
-		sprite.modulate = Color(1.2, 1.2, 1.2)  # Leicht aufhellen
+#	if is_clickable:
+#		sprite.modulate = Color(1.2, 1.2, 1.2)  # Leicht aufhellen
 
-func _on_mouse_exited():
+#func _on_mouse_exited():
 	# Farbe zurücksetzen
-	sprite.modulate = Color.WHITE
-	
+#	sprite.modulate = Color.WHITE
+
+func delete_me():
+	queue_free()
