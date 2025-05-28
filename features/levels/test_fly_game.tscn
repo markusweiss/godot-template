@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://de2f4iob4u2sm"]
 
 [ext_resource type="Script" uid="uid://brijnvps7f5c1" path="res://features/levels/test_fly_game.gd" id="1_acdtr"]
-[ext_resource type="Texture2D" uid="uid://d0u7ibrqee6bi" path="res://features/player/assets/images/icon.svg" id="1_kfuib"]
 [ext_resource type="PackedScene" uid="uid://c43ylvgo7177g" path="res://features/Enemys/fly.tscn" id="2_rg8gr"]
+[ext_resource type="Texture2D" uid="uid://cmbgl8ubd0tqj" path="res://features/player/assets/images/flyswatter.png" id="3_nmn2b"]
 [ext_resource type="Script" uid="uid://eepdu6k8ur63" path="res://features/levels/fly_swatter.gd" id="4_4pjdu"]
 [ext_resource type="Script" uid="uid://c3odfivc04uu0" path="res://features/levels/area_2d.gd" id="5_nmn2b"]
 
@@ -10,7 +10,7 @@
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4pjdu"]
-size = Vector2(23.4248, 8.45284)
+size = Vector2(57.6341, 60.9959)
 
 [node name="TestFlyGame" type="Node2D"]
 script = ExtResource("1_acdtr")
@@ -26,8 +26,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_i5udf")
 [node name="Fly" parent="Panel" groups=["fliegen"] instance=ExtResource("2_rg8gr")]
 
 [node name="FlySwatter" type="Sprite2D" parent="."]
-scale = Vector2(2.39062, 2.48438)
-texture = ExtResource("1_kfuib")
+position = Vector2(0, 135)
+texture = ExtResource("3_nmn2b")
+offset = Vector2(-4.61538, 197.154)
 script = ExtResource("4_4pjdu")
 
 [node name="Area2D" type="Area2D" parent="FlySwatter"]
@@ -36,8 +37,8 @@ scale = Vector2(0.418301, 0.402516)
 script = ExtResource("5_nmn2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlySwatter/Area2D"]
-position = Vector2(87, -46.5)
-scale = Vector2(2.39062, 2.48437)
+position = Vector2(79.4885, 124.877)
+scale = Vector2(2.48699, 2.68608)
 shape = SubResource("RectangleShape2D_4pjdu")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

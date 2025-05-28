@@ -4,75 +4,74 @@ extends Area2D
 
 var speed := Vector2.ZERO
 var screen_size : Vector2
-#var is_clickable := true  # Kann deaktiviert werden, wenn nötig
+
+# Für Richtungsänderung
+var change_dir_timer := 0.0
+var change_dir_interval := 1.5  # Startwert – wird nach jeder Änderung neu zufällig gesetzt
+var max_speed := 500  # Maximale Geschwindigkeit
+var min_speed := 150  # Minimale Geschwindigkeit
 
 func _ready():
 	randomize()
 	screen_size = get_viewport_rect().size
 	setup_spawn()
 	sprite.play("fliegen")
-		
-	#mouse_entered.connect(_on_mouse_entered)
-	#mouse_exited.connect(_on_mouse_exited)
-	#input_event.connect(_on_input_event)
 
 func setup_spawn():
-	# Zufällige Startposition an einem der Bildschirmränder
 	var start_side = randi() % 4
 	var target_pos : Vector2
 	
 	match start_side:
-		0:  # Rechts
+		0:
 			position = Vector2(screen_size.x + 50, randf_range(0, screen_size.y))
 			target_pos = Vector2(-50, randf_range(0, screen_size.y))
-		1:  # Links
+		1:
 			position = Vector2(-50, randf_range(0, screen_size.y))
 			target_pos = Vector2(screen_size.x + 50, randf_range(0, screen_size.y))
-		2:  # Oben
+		2:
 			position = Vector2(randf_range(0, screen_size.x), -50)
 			target_pos = Vector2(randf_range(0, screen_size.x), screen_size.y + 50)
-		3:  # Unten
+		3:
 			position = Vector2(randf_range(0, screen_size.x), screen_size.y + 50)
 			target_pos = Vector2(randf_range(0, screen_size.x), -50)
 	
-	# Zufällige Geschwindigkeitsvariation
-	var base_speed = randf_range(100, 500)
-	# Richtungsvektor zur Zielposition berechnen
+	var base_speed = randf_range(min_speed, max_speed)
 	var direction = (target_pos - position).normalized()
 	speed = direction * base_speed
+
+	# Sprite-Rotation
+	rotation = direction.angle() + deg_to_rad(90)  # Passe an je nach Sprite-Ausrichtung
 	
-	# Zusätzliche Zufallswerte
 	scale = Vector2.ONE * randf_range(0.8, 1.2)
-	rotation = randf_range(-0.3, 0.4)
+	change_dir_timer = randf_range(1.0, 3.0)
 
 func _process(delta):
 	position += speed * delta
-	# Löschen wenn außerhalb mit Puffer
+
+	change_dir_timer -= delta
+	if change_dir_timer <= 0:
+		change_direction()
+		change_dir_timer = randf_range(1.0, 2.5)
+
 	if position.x < -150 or position.x > screen_size.x + 150 or position.y < -150 or position.y > screen_size.y + 150:
 		queue_free()
 
-#signal fly_clicked
+func change_direction():
+	var direction = speed.normalized()
+	
+	# 20% Wahrscheinlichkeit für kompletten U-Turn
+	if randf() < 0.2:
+		direction = -direction
+	else:
+		# Richtungsänderung
+		var angle_change = randf_range(-PI / 3, PI / 3)
+		direction = direction.rotated(angle_change)
 
-#func _on_input_event(viewport, event, shape_idx):
-	#if not is_clickable:
-	#	return
-		
-	#if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-	#	print("Fly clicked and destroyed!")
-		# Optional: Effekt vor dem Löschen abspielen
-		#sprite.play("explode")  # Angenommen Sie haben eine Animation namens "explode"
-		#await sprite.animation_finished
-	#	fly_clicked.emit()
-	#	queue_free()
-
-#func _on_mouse_entered():
-	# Optional: Mouse-over Effekt
-#	if is_clickable:
-#		sprite.modulate = Color(1.2, 1.2, 1.2)  # Leicht aufhellen
-
-#func _on_mouse_exited():
-	# Farbe zurücksetzen
-#	sprite.modulate = Color.WHITE
-
-func delete_me():
-	queue_free()
+	# Geschwindigkeit erhöhen, wenn die Richtung geändert wurde
+	var new_speed = speed.length() * 1.3  # 30% schneller
+	if new_speed > max_speed:
+		new_speed = max_speed  # Geschwindigkeit darf nicht über max_speed gehen
+	speed = direction * new_speed
+	
+	# Neue Sprite-Ausrichtung
+	rotation = direction.angle() + deg_to_rad(90)  # ggf. anpassen

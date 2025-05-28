@@ -1,12 +1,12 @@
 extends Node2D
 
 @export var fliege_scene : PackedScene = preload("res://features/Enemys/fly.tscn")
-@export var min_spawn_time : float = 0.8
+@export var min_spawn_time : float = 0.2
 @export var max_spawn_time : float = 1.5
 
 @onready var player = $AudioStreamPlayer2D
 
-@onready var spectrum = AudioServer.get_bus_effect_instance(AudioServer.get_bus_index("Master"), 0)
+@onready var spectrum = AudioServer.get_bus_effect_instance(AudioServer.get_bus_index("Music"), 0)
 var bass_strength : float = 0.0
 
 func _process(delta):
@@ -18,15 +18,15 @@ func _process(delta):
 func _update_fliegen_scale(strength: float):
 	for fliege in get_tree().get_nodes_in_group("fliegen"):
 		var base_scale = Vector2(1, 1)
-		var scale_factor = clamp(strength * 30.0, 1.0, 2.0) # Werte anpassen!
+		var scale_factor = clamp(strength * 20.0, 1.0, 3.0) # Werte anpassen!
 		#fliege.scale = base_scale * scale_factor
 		fliege.scale = fliege.scale.lerp(base_scale * scale_factor, 0.1)  # Der Wert 0.1 kontrolliert die Geschwindigkeit der Skalierung
 
 func _ready():
 	# Musik initialisieren
-	player.stream = load("res://features/UI/main_menu/assets/sounds/templateloop.mp3")
+	player.stream = load("res://features/UI/main_menu/assets/sounds/beattest2.mp3")
 	player.stream.loop = true
-	player.bus = "Master"
+	player.bus = "Music"
 	player.play()
 	
 	randomize()

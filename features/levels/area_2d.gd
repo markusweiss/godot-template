@@ -7,4 +7,13 @@ func _ready():
 func _on_area_entered(area):
 	if not $CollisionShape2D.disabled:
 		print("Treffer mit Area: ", area.name)
+		play_splash_sound()
 		area.queue_free()
+
+func play_splash_sound():
+	var sound_player := AudioStreamPlayer2D.new()
+	sound_player.stream = load("res://features/Enemys/assets/sounds/splash.mp3")
+	sound_player.bus = "SFX"
+	sound_player.global_position = global_position  # Oder setze eine andere Position
+	add_child(sound_player)
+	sound_player.play()
