@@ -1,9 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct6plw4c6tax4"]
+[gd_scene load_steps=6 format=3 uid="uid://ct6plw4c6tax4"]
 
 [ext_resource type="Script" uid="uid://ofukold4l3nq" path="res://start.gd" id="1_d523m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ots34"]
-bg_color = Color(0.807402, 0.477342, 0.655816, 1)
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_ots34"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qn1rc"]
+gradient = SubResource("Gradient_ots34")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ots34"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 98, 0)
+scale_min = 2.0
+scale_max = 9.0
+color_ramp = SubResource("GradientTexture1D_qn1rc")
 
 [node name="Start" type="CanvasLayer"]
 script = ExtResource("1_d523m")
@@ -16,3 +30,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ots34")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Panel/HBoxContainer"]
+scale = Vector2(6, 6)
+amount = 90
+preprocess = 2.0
+trail_enabled = true
+trail_sections = 5
+process_material = SubResource("ParticleProcessMaterial_ots34")
