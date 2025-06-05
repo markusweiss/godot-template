@@ -19,7 +19,7 @@ scale_min = 2.0
 scale_max = 9.0
 color_ramp = SubResource("GradientTexture1D_qn1rc")
 
-[node name="Start" type="CanvasLayer"]
+[node name="Start" type="Node"]
 script = ExtResource("1_d523m")
 
 [node name="Panel" type="Panel" parent="."]
@@ -30,6 +30,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ots34")
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -40,6 +41,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Panel/HBoxContainer"]
 scale = Vector2(6, 6)

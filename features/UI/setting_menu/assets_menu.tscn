@@ -95,8 +95,22 @@ script = ExtResource("2_5d2m7")
 bus_name = "Master"
 default_value = 0.78
 
+[node name="Resolution" type="Label" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Auflösung"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Fullscreen" type="Label" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+
 [node name="Button" type="Button" parent="MarginContainer/Panel/VBoxContainer"]
 layout_mode = 2
-text = "close"
+text = "speichern"
 
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Button" to="." method="_on_button_pressed"]

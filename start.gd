@@ -1,6 +1,7 @@
-extends CanvasLayer
+extends Node
 
 @onready var background = $Panel
+var settings_menu: Node = null
 
 func _ready():
-	Globals.open_main_menu()
+	SceneManager.open_main_menu()

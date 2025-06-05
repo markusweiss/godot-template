@@ -39,7 +39,7 @@ grow_horizontal = 2
 
 [node name="Title" type="Label" parent="Control/VBoxContainerTitle"]
 layout_mode = 2
-text = "Title"
+text = "The Game with no Name"
 
 [node name="VBoxContainerVersion" type="VBoxContainer" parent="Control"]
 layout_mode = 1
