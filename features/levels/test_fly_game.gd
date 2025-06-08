@@ -9,11 +9,16 @@ extends Node2D
 @onready var spectrum = AudioServer.get_bus_effect_instance(AudioServer.get_bus_index("Music"), 0)
 var bass_strength : float = 0.0
 
-func _process(delta):
+func _process(_delta):
 	if spectrum:
-		var spectrum_data = spectrum.get_magnitude_for_frequency_range(10, 300, 1)
-		bass_strength = spectrum_data[0]
-		_update_fliegen_scale(bass_strength)
+		#var spectrum_data = spectrum.get_magnitude_for_frequency_range(10, 300, 1)
+		
+		var bass = spectrum.get_magnitude_for_frequency_range(20, 250, 1)[0]
+		var mids = spectrum.get_magnitude_for_frequency_range(250, 4000, 1)[0]
+		var highs = spectrum.get_magnitude_for_frequency_range(4000, 20000, 1)[0]
+		
+		#bass_strength = spectrum_data[0]
+		_update_fliegen_scale(bass)
 
 func _update_fliegen_scale(strength: float):
 	for fliege in get_tree().get_nodes_in_group("fliegen"):

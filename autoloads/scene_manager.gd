@@ -1,15 +1,13 @@
 extends Node
 
 @onready var root = get_tree().root
-
 @onready var main_menu_scene: PackedScene = preload("res://features/UI/main_menu/main_menu.tscn")
-var main_menu: Node = null
-
-@onready var settings_menu_scene: PackedScene = preload("res://features/UI/setting_menu/assets_menu.tscn")
-var settings_menu: Node = null
-
+@onready var settings_menu_scene: PackedScene = preload("res://features/UI/settings_menu/settings_menu.tscn")
 @onready var test_level_scene: PackedScene = preload("res://features/levels/test_fly_game.tscn")
+
 var test_level: Node = null
+var settings_menu: Node = null
+var main_menu: Node = null
 
 func _ready() -> void:
 	pass

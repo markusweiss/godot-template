@@ -11,7 +11,7 @@ func apply_saved_audio_settings():
 		print("Keine gespeicherten Einstellungen gefunden. Verwende Defaults.")
 	
 	for bus_name in BUS_NAMES:
-		var volume = config.get_value("audio", bus_name, 0.8) # Default 1.0
+		var volume = config.get_value("audio", bus_name, 1.0) # Default 1.0
 		var bus_index = AudioServer.get_bus_index(bus_name)
 
 		if bus_index == -1:
