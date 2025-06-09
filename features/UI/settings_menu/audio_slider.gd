@@ -32,7 +32,8 @@ func _on_value_changed(new_value: float):
 		print("Erstelle neue Konfigurationsdatei")
 	
 	# Setze aktuellen Wert
-	config.set_value("audio", bus_name, new_value)
-	config.save(Globals.SETTINGS_PATH)
+	SettingsManager.set_setting("audio", bus_name, new_value)
+	#config.set_value("audio", bus_name, new_value)
+	#config.save(Globals.SETTINGS_PATH)
 
 	print("Gespeichert:", bus_name, new_value)

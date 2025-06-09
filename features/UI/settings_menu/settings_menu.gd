@@ -17,7 +17,7 @@ func _ready():
 		resolution_option_button.add_item("%d x %d" % [res.x, res.y])
 
 	# Einstellungen laden
-	var saved_res = SettingsManager.get_setting("display", "resolution", Vector2i(1920, 1080))
+	var saved_res = SettingsManager.get_setting("display", "resolution", Vector2i(1280, 720))
 	var is_fullscreen = SettingsManager.get_setting("display", "fullscreen", false)
 	selected_resolution = saved_res
 

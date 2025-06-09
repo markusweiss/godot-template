@@ -17,7 +17,6 @@ config/icon="res://features/player/assets/images/icon.svg"
 [autoload]
 
 Globals="*res://autoloads/globals.gd"
-AudioSettings="*res://autoloads/audio_settings.gd"
 SceneManager="*res://autoloads/scene_manager.gd"
 SettingsManager="*res://autoloads/settings_manager.gd"
 

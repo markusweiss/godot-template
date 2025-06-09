@@ -65,7 +65,7 @@ max_value = 1.0
 step = 0.01
 script = ExtResource("2_fp5f8")
 bus_name = "SFX"
-default_value = 0.22
+default_value = 0.7
 
 [node name="MusicVoume" type="Label" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -93,7 +93,7 @@ max_value = 1.0
 step = 0.01
 script = ExtResource("2_fp5f8")
 bus_name = "Master"
-default_value = 0.78
+default_value = 0.7
 
 [node name="Resolution" type="Label" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
 layout_mode = 2
