@@ -28,6 +28,8 @@ func _update_fliegen_scale(strength: float):
 		fliege.scale = fliege.scale.lerp(base_scale * scale_factor, 0.1)  # Der Wert 0.1 kontrolliert die Geschwindigkeit der Skalierung
 
 func _ready():
+	# Pause zuslassen
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	# Musik initialisieren
 	player.stream = load("res://features/UI/main_menu/assets/sounds/beattest2.mp3")
 	player.stream.loop = true
