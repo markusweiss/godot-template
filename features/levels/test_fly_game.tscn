@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://de2f4iob4u2sm"]
+[gd_scene load_steps=10 format=3 uid="uid://de2f4iob4u2sm"]
 
 [ext_resource type="Script" uid="uid://brijnvps7f5c1" path="res://features/levels/test_fly_game.gd" id="1_acdtr"]
 [ext_resource type="PackedScene" uid="uid://c1itgh3jndaye" path="res://features/UI/pause.tscn" id="2_pgi5k"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cmbgl8ubd0tqj" path="res://features/player/assets/images/flyswatter.png" id="3_nmn2b"]
 [ext_resource type="Script" uid="uid://eepdu6k8ur63" path="res://features/levels/fly_swatter.gd" id="4_4pjdu"]
 [ext_resource type="Script" uid="uid://c3odfivc04uu0" path="res://features/levels/area_2d.gd" id="5_nmn2b"]
+[ext_resource type="Script" uid="uid://ccte5gjoq0iqg" path="res://features/levels/camera_2d.gd" id="7_68erv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5udf"]
 bg_color = Color(0, 0, 0, 1)
@@ -19,8 +20,8 @@ script = ExtResource("1_acdtr")
 [node name="Pause" parent="." instance=ExtResource("2_pgi5k")]
 
 [node name="Panel" type="Panel" parent="."]
-offset_right = 2304.0
-offset_bottom = 1296.0
+offset_right = 2560.0
+offset_bottom = 1440.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_i5udf")
 
@@ -45,3 +46,7 @@ scale = Vector2(2.48699, 2.68608)
 shape = SubResource("RectangleShape2D_4pjdu")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("7_68erv")

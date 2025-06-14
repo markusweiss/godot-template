@@ -29,7 +29,7 @@ func _update_fliegen_scale(strength: float):
 
 func _ready():
 	# Pause zuslassen
-	process_mode = Node.PROCESS_MODE_PAUSABLE
+	# process_mode = Node.PROCESS_MODE_PAUSABLE
 	# Musik initialisieren
 	player.stream = load("res://features/UI/main_menu/assets/sounds/beattest2.mp3")
 	player.stream.loop = true

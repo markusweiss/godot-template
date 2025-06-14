@@ -1,6 +1,6 @@
 extends Sprite2D
 
-@export var boundary_rect: Rect2 = Rect2(0, 0, 1024, 600)
+@export var boundary_rect: Rect2 = Rect2(0, 0, 1280, 720)
 
 var is_swinging := false
 var swing_timer := 0.0
@@ -55,6 +55,7 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not is_swinging:
 		play_swatter_sound()
+		get_viewport().get_camera_2d().shake()
 		is_swinging = true
 		swing_timer = 0.0
 
