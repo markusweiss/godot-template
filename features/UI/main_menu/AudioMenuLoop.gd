@@ -5,7 +5,10 @@ extends AudioStreamPlayer2D
 func _ready():
 	stream = preload("res://features/UI/main_menu/assets/sounds/templateloop.mp3")
 	bus = "Music"
-
+	
+	# Node auch während Pause aktiv lassen
+	#process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	# Lade gespeicherten Wert für Music
 	var config = ConfigFile.new()
 	var volume = 0.7 # fallback default
@@ -19,9 +22,8 @@ func _ready():
 		push_error("Audio-Bus 'Music' nicht gefunden!")
 	else:
 		AudioServer.set_bus_volume_db(bus_index, linear_to_db(volume))
-
+		
 	play()
-
-
+	
 func _on_finished():
 	play()
