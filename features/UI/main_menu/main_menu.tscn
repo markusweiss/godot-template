@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b30sx5ej0hid5"]
+[gd_scene load_steps=3 format=3 uid="uid://b30sx5ej0hid5"]
 
 [ext_resource type="Script" uid="uid://dd8f1cpvokue6" path="res://features/UI/main_menu/main_menu.gd" id="1_8h34a"]
-[ext_resource type="AudioStream" uid="uid://myljnx3tb10x" path="res://features/UI/main_menu/assets/sounds/templateloop.mp3" id="2_wspj3"]
-[ext_resource type="Script" uid="uid://djft5vi7y7tgx" path="res://features/UI/main_menu/AudioMenuLoop.gd" id="3_bto56"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37v8d"]
 bg_color = Color(0.231373, 0.231373, 0.231373, 1)
@@ -14,10 +12,6 @@ border_color = Color(1, 1, 1, 1)
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_8h34a")
-
-[node name="AudioMenuLoop" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_wspj3")
-script = ExtResource("3_bto56")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -98,7 +92,6 @@ text = "Settings"
 layout_mode = 2
 text = "Quit Game"
 
-[connection signal="finished" from="AudioMenuLoop" to="AudioMenuLoop" method="_on_finished"]
 [connection signal="pressed" from="Control/MarginContainer/Panel/VBoxContainerButtons/ButtonStart" to="." method="_on_button_start_pressed"]
 [connection signal="pressed" from="Control/MarginContainer/Panel/VBoxContainerButtons/ButtonSettings" to="." method="_on_button_settings_pressed"]
 [connection signal="pressed" from="Control/MarginContainer/Panel/VBoxContainerButtons/ButtonQuit" to="." method="_on_button_quit_pressed"]

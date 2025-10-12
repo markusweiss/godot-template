@@ -4,39 +4,55 @@ extends Node2D
 @export var min_spawn_time : float = 0.2
 @export var max_spawn_time : float = 1.5
 
-@onready var player = $AudioStreamPlayer2D
+# Originalgrößen der Fliegen
+var fliegen_original_scale = {}
 
-@onready var spectrum = AudioServer.get_bus_effect_instance(AudioServer.get_bus_index("Music"), 0)
+# Puls-Simulation
+@export var bpm : float = 120.0  # Beats pro Minute
+var beat_timer : float = 0.0
+var beat_period : float = 0.0  # Sekunden pro Beat
 
-var bass_strength : float = 0.0
+func _ready():
+	randomize()
 
-func _process(_delta):
-	if spectrum:
-		var bass = spectrum.get_magnitude_for_frequency_range(20, 250, 1)[0]
-		#var mids = spectrum.get_magnitude_for_frequency_range(250, 4000, 1)[0]
-		#var highs = spectrum.get_magnitude_for_frequency_range(4000, 20000, 1)[0]
-		
-		_update_fliegen_scale(bass)
+	# Spawn-Timer verbinden
+	var timer = $Panel/SpawnFlyTimer
+	if timer:
+		timer.timeout.connect(Callable(self, "_spawn_fliege"))
+		timer.start(randf_range(min_spawn_time, max_spawn_time))
+
+	# Beat-Periode berechnen
+	beat_period = 60.0 / bpm
+
+	# Musik starten über AudioManager
+	if AudioManager:
+		AudioManager.stop_music()
+		var beat_stream = preload("res://features/UI/main_menu/assets/sounds/beattest2.mp3")
+		AudioManager.play_music(beat_stream)
+		beat_stream.loop = true
+		#AudioManager.set_spectrum_analyser(true)
+
+func _process(delta):
+	# Beat-Timer hochzählen
+	beat_timer += delta
+
+	# Puls-Simulation mit Sinuskurve (0..1)
+	var pulse_strength = sin(beat_timer / beat_period * TAU) * 0.5 + 0.5
+
+	_update_fliegen_scale(pulse_strength)
 
 func _update_fliegen_scale(strength: float):
 	for fliege in get_tree().get_nodes_in_group("fliegen"):
-		var base_scale = Vector2(1, 1)
-		var scale_factor = clamp(strength * 20.0, 1.0, 3.0) # Werte anpassen!
-		#fliege.scale = base_scale * scale_factor
-		fliege.scale = fliege.scale.lerp(base_scale * scale_factor, 0.1)  # Der Wert 0.1 kontrolliert die Geschwindigkeit der Skalierung
+		if fliege not in fliegen_original_scale:
+			fliegen_original_scale[fliege] = fliege.scale
 
-func _ready():
-	# Pause zuslassen
-	# process_mode = Node.PROCESS_MODE_PAUSABLE
-	# Musik initialisieren
-	player.stream = load("res://features/UI/main_menu/assets/sounds/beattest2.mp3")
-	player.stream.loop = true
-	player.bus = "Music"
-	player.play()
-	
-	randomize()
-	$Panel/SpawnFlyTimer.timeout.connect(_spawn_fliege)
-	$Panel/SpawnFlyTimer.start(randf_range(min_spawn_time, max_spawn_time))
+		var original_scale = fliegen_original_scale[fliege]
+
+		# Puls-Skala anwenden (max 50% größer)
+		var scale_factor = 1.0 + strength * 0.9
+		fliege.scale = fliege.scale.lerp(original_scale * scale_factor, 0.2)
+
+
 
 func _spawn_fliege():
 	var fliege = fliege_scene.instantiate()
@@ -44,18 +60,15 @@ func _spawn_fliege():
 	add_child(fliege)
 	var test = $Panel/FlyCount.text.to_int()
 	
-	# Testin around Spund Pitch
+	# Testing around Sound Pitch
 	if test > 1 and randf_range(1,10) > 6:
 		$Panel/FlyCount.text = str(test - 1)
 	if test >= 3 and test <= 5:
-		player.pitch_scale = 1.1
+		AudioManager.set_pitch(1.1)
 	elif test > 5:
-		player.pitch_scale = 1.2
+		AudioManager.set_pitch(1.2)
 	else:
-		player.pitch_scale = 1.0
+		AudioManager.set_pitch(1.0)
 		
-	fliege.add_to_group("fliegen")  # Wichtig für die Skalierung
+	fliege.add_to_group("fliegen")
 	$Panel/SpawnFlyTimer.start(randf_range(min_spawn_time, max_spawn_time))
-
-	
-	

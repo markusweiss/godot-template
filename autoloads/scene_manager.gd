@@ -14,11 +14,19 @@ func _ready() -> void:
 
 func open_main_menu() -> void:
 	if main_menu == null:
-		print("Opening main menu")
 		main_menu = main_menu_scene.instantiate()
 		root.call_deferred("add_child", main_menu)
+		print("Opening main menu")
 	else:
 		push_warning("Main menu already exists in the scene.")
+
+func close_main_menu() -> void:
+	if main_menu != null:
+		main_menu.queue_free()
+		main_menu = null
+		print("Main menu closed")
+	else:
+		push_warning("Main menu is not open.")
 
 func open_settings_menu() -> void:
 	if settings_menu == null:

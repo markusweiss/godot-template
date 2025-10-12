@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://de2f4iob4u2sm"]
+[gd_scene load_steps=10 format=3 uid="uid://de2f4iob4u2sm"]
 
 [ext_resource type="Script" uid="uid://brijnvps7f5c1" path="res://features/levels/test_fly_game.gd" id="1_acdtr"]
 [ext_resource type="PackedScene" uid="uid://c1itgh3jndaye" path="res://features/UI/pause.tscn" id="2_pgi5k"]
@@ -13,28 +13,6 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4pjdu"]
 size = Vector2(57.6341, 60.9959)
-
-[sub_resource type="GDScript" id="GDScript_68erv"]
-script/source = "extends AudioStreamPlayer2D
-
-@export var pause_node_path: NodePath  # im Editor zuweisen
-var pause_node: Node
-var original_volume_db: float
-
-func _ready():
-	process_mode = Node.PROCESS_MODE_ALWAYS
-	pause_node = get_node(pause_node_path)
-	pause_node.connect(\"pause_toggled\", Callable(self, \"_on_pause_toggled\"))
-	original_volume_db = volume_db
-
-func _on_pause_toggled(paused: bool):
-	if paused:
-		volume_db = original_volume_db - 10
-		print(\"Pause aktiviert:\", volume_db)
-	else:
-		volume_db = original_volume_db
-		print(\"Pause deaktiviert:\", volume_db)
-"
 
 [node name="TestFlyGame" type="Node2D"]
 script = ExtResource("1_acdtr")
@@ -73,10 +51,6 @@ script = ExtResource("5_nmn2b")
 position = Vector2(79.4885, 124.877)
 scale = Vector2(2.48699, 2.68608)
 shape = SubResource("RectangleShape2D_4pjdu")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-script = SubResource("GDScript_68erv")
-pause_node_path = NodePath("../Pause")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

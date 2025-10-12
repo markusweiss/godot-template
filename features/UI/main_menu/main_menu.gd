@@ -3,7 +3,12 @@ extends CanvasLayer
 const BUS_NAMES := ["Master", "Music", "SFX"]
 
 func _ready():
-	%Version.text = " Version: " + str(Globals.VERSION)
+	var menu_music = preload("res://features/UI/main_menu/assets/sounds/templateloop.mp3")
+	AudioManager.play_music(menu_music)
+	AudioManager.set_muffled(true)
+	menu_music.loop = true
+	
+	%Version.text = " Template Version: " + str(Globals.VERSION)
 	apply_saved_audio_settings()
 	
 	var saved_res = SettingsManager.get_setting("display", "resolution", Vector2i(1280, 720))
