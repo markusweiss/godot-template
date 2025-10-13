@@ -18,7 +18,7 @@ func _ready():
 	# Spawn-Timer verbinden
 	var timer = $Panel/SpawnFlyTimer
 	if timer:
-		timer.timeout.connect(Callable(self, "_spawn_fliege"))
+		timer.timeout.connect(Callable(self, "spawn_fliege"))
 		timer.start(randf_range(min_spawn_time, max_spawn_time))
 
 	# Beat-Periode berechnen
@@ -29,6 +29,7 @@ func _ready():
 		AudioManager.stop_music()
 		var beat_stream = preload("res://features/UI/main_menu/assets/sounds/beattest2.mp3")
 		AudioManager.play_music(beat_stream)
+		AudioManager.set_muffled(false)
 		beat_stream.loop = true
 		#AudioManager.set_spectrum_analyser(true)
 
@@ -39,9 +40,9 @@ func _process(delta):
 	# Puls-Simulation mit Sinuskurve (0..1)
 	var pulse_strength = sin(beat_timer / beat_period * TAU) * 0.5 + 0.5
 
-	_update_fliegen_scale(pulse_strength)
+	update_fliegen_scale(pulse_strength)
 
-func _update_fliegen_scale(strength: float):
+func update_fliegen_scale(strength: float):
 	for fliege in get_tree().get_nodes_in_group("fliegen"):
 		if fliege not in fliegen_original_scale:
 			fliegen_original_scale[fliege] = fliege.scale
@@ -53,22 +54,30 @@ func _update_fliegen_scale(strength: float):
 		fliege.scale = fliege.scale.lerp(original_scale * scale_factor, 0.2)
 
 
-
-func _spawn_fliege():
+func spawn_fliege():
 	var fliege = fliege_scene.instantiate()
 	fliege.input_pickable = true
 	add_child(fliege)
-	var test = $Panel/FlyCount.text.to_int()
 	
-	# Testing around Sound Pitch
-	if test > 1 and randf_range(1,10) > 6:
+	# Originalscale direkt speichern
+	fliegen_original_scale[fliege] = fliege.scale
+
+	fliege.add_to_group("fliegen")
+
+	# FlyCount-Logik
+	var test = $Panel/FlyCount.text.to_int()
+	if test > 0 and randf_range(1,10) > 6:
 		$Panel/FlyCount.text = str(test - 1)
+
+	# TODO: Testing around Sound Pitch and muffeld Effect
 	if test >= 3 and test <= 5:
+		AudioManager.set_muffled(true)
 		AudioManager.set_pitch(1.1)
 	elif test > 5:
+		AudioManager.set_muffled(false)
 		AudioManager.set_pitch(1.2)
-	else:
+	elif test == 1:
+		AudioManager.set_muffled(false)
 		AudioManager.set_pitch(1.0)
-		
-	fliege.add_to_group("fliegen")
+
 	$Panel/SpawnFlyTimer.start(randf_range(min_spawn_time, max_spawn_time))

@@ -55,5 +55,6 @@ shape = SubResource("RectangleShape2D_4pjdu")
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 script = ExtResource("7_68erv")
+shake_strength = 20
 
 [node name="Pause" parent="." instance=ExtResource("2_pgi5k")]
