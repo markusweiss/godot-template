@@ -109,6 +109,13 @@ text = "Fullscreen"
 [node name="FullscreenCheckBox" type="CheckBox" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
 layout_mode = 2
 
+[node name="Screen Shake" type="Label" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Screen Shake"
+
+[node name="ScreenShakeCheckBox" type="CheckBox" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
+layout_mode = 2
+
 [node name="Control" type="Label" parent="MarginContainer/Panel/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Tasten
@@ -123,4 +130,5 @@ text = "esc : Pause
 layout_mode = 2
 text = "speichern"
 
+[connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/GridContainer/ScreenShakeCheckBox" to="." method="_on_screen_shake_check_box_toggled"]
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Button" to="." method="_on_button_pressed"]

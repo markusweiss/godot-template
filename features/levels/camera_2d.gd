@@ -10,18 +10,20 @@ func shake():
 
 
 func _process(delta):
-	if _shake_timer > 0:
-		_shake_timer -= delta
-		var shake_offset = Vector2(
-			randf_range(-1, 1),
-			randf_range(-1, 1)
-		) * shake_strength
+	var is_screen_shake = SettingsManager.get_setting("display", "screen_shake", false)
+	if is_screen_shake:
+		if _shake_timer > 0:
+			_shake_timer -= delta
+			var shake_offset = Vector2(
+				randf_range(-1, 1),
+				randf_range(-1, 1)
+			) * shake_strength
 
-		if shake_offset.length() > shake_strength:
-			shake_offset = shake_offset.normalized() * shake_strength
+			if shake_offset.length() > shake_strength:
+				shake_offset = shake_offset.normalized() * shake_strength
 
-		shake_offset = shake_offset.round()  # Für sauberen Pixellook
-		position = shake_offset
-	else:
-		position = Vector2.ZERO
+			shake_offset = shake_offset.round()  # Für sauberen Pixellook
+			position = shake_offset
+		else:
+			position = Vector2.ZERO
 		

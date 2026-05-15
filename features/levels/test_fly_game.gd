@@ -71,6 +71,7 @@ func spawn_fliege():
 
 	# TODO: Testing around Sound Pitch and muffeld Effect
 	if test >= 3 and test <= 5:
+		# test muffled
 		AudioManager.set_muffled(true)
 		AudioManager.set_pitch(1.1)
 	elif test > 5:

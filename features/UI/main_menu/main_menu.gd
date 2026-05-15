@@ -21,7 +21,7 @@ func _ready():
 func apply_resolution(resolution: Vector2i) -> void:
 	DisplayServer.window_set_size(resolution)
 	var screen_size = DisplayServer.screen_get_size()
-	var center_pos = (screen_size - resolution) / 2
+	var center_pos =  Vector2(screen_size - resolution) / 2
 	DisplayServer.window_set_position(center_pos)
 	
 func apply_saved_audio_settings():

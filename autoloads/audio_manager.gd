@@ -50,7 +50,7 @@ func set_muffled(enabled: bool):
 		AudioServer.add_bus_effect(bus_index, lowpass_filter, 0)
 
 	lowpass_filter.cutoff_hz = 400.0 if enabled else 22000.0
-	print("Muffled: ", enabled, "Cutoff: ", lowpass_filter.cutoff_hz)
+	print("Muffled: ", enabled, " Cutoff: ", lowpass_filter.cutoff_hz)
 
 
 func on_pause_toggled(paused: bool):

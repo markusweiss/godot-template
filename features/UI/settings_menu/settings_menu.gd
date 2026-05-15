@@ -19,6 +19,8 @@ func _ready():
 	# Einstellungen laden
 	var saved_res = SettingsManager.get_setting("display", "resolution", Vector2i(1280, 720))
 	var is_fullscreen = SettingsManager.get_setting("display", "fullscreen", false)
+	var is_screen_shake = SettingsManager.get_setting("display", "screen_shake", false)
+
 	selected_resolution = saved_res
 
 	# Fenster konfigurieren
@@ -27,7 +29,8 @@ func _ready():
 
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 	fullscreen_checkbox.button_pressed = is_fullscreen
-
+	$MarginContainer/Panel/VBoxContainer/GridContainer/ScreenShakeCheckBox.button_pressed = is_screen_shake
+	
 	# Auswahl im Dropdown setzen
 	for i in range(available_resolutions.size()):
 		if available_resolutions[i] == saved_res:
@@ -95,9 +98,19 @@ func _on_resolution_option_button_item_selected(index: int) -> void:
 func apply_resolution(resolution: Vector2i) -> void:
 	DisplayServer.window_set_size(resolution)
 	var screen_size = DisplayServer.screen_get_size()
-	var center_pos = (screen_size - resolution) / 2
+	var center_pos =  Vector2(screen_size - resolution) / 2
 	DisplayServer.window_set_position(center_pos)
 
 
 func _on_button_pressed():
 	queue_free()  # Optional: Fenster oder Menü schließen
+
+
+func _on_screen_shake_check_box_toggled(toggled_on: bool) -> void:
+	var screen_shake = toggled_on
+	if not toggled_on:
+		SettingsManager.set_setting("display", "screen_shake", screen_shake)
+	else:
+		SettingsManager.set_setting("display", "screen_shake", screen_shake)
+		
+		

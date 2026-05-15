@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct6plw4c6tax4"]
+[gd_scene format=3 uid="uid://ct6plw4c6tax4"]
 
 [ext_resource type="Script" uid="uid://ofukold4l3nq" path="res://start.gd" id="1_d523m"]
 
@@ -19,10 +19,10 @@ scale_min = 2.0
 scale_max = 9.0
 color_ramp = SubResource("GradientTexture1D_qn1rc")
 
-[node name="Start" type="Node"]
+[node name="Start" type="Node" unique_id=941169038]
 script = ExtResource("1_d523m")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=2089699413]
 z_index = -1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +32,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ots34")
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=846449983]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -43,7 +43,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Panel/HBoxContainer"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Panel/HBoxContainer" unique_id=152618950]
 scale = Vector2(6, 6)
 amount = 90
 preprocess = 2.0
